@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel-App Register</title>
+</head>
+<body>
+<div align="center">
+    <h2>Please register</h2>
+
+    <div th:if="${exist}">
+        User with this username already exist
+    </div>
+
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div>
+            <label for="username">Username:</label> &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" th:field="*{username}" placeholder="Username" id="username">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="pwd">Password:</label> &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="password" th:field="*{password}" placeholder="Password" id="pwd">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="email">E-mail:</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" th:field="*{email}" placeholder="E-mail" id="email">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>
+        </div>
+
+        <br>
+
+        <button type="submit" >REGISTER NOW</button>
+    </form>
+</div>
+
+
+
+</body>
+</html>

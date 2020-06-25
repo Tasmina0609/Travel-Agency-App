@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Tours</title>
+</head>
+<body>
+<div align="center">
+    <h1>All Tours</h1>
+
+    <br>
+
+    <form th:action="@{/admin/tours}">
+        Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+        &nbsp;
+        <input type="submit" value="Search" />
+        &nbsp;
+        <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" /> &nbsp;&nbsp;
+
+        <a th:href="@{'/admin/newTour/'}">Create tour</a>
+    </form>
+
+    <br>
+    <br>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Tour ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>Status</th>
+            <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tour: ${tourList}">
+            <td th:text="${tour.id}">Tour ID</td>
+            <td th:text="${tour.name}">Name</td>
+            <td th:text="${tour.price}+' AZN'">Price</td>
+            <td th:text="${tour.description}">Description</td>
+            <td th:text="${#dates.format(tour.startDate, 'dd-MMM-yyyy')}">Start Date</td>
+            <td th:text="${#dates.format(tour.endDate, 'dd-MMM-yyyy')}">End Date</td>
+            <td th:text="${tour.status.displayValue}"></td>
+
+            <td>
+                <a th:href="@{'/admin/editTour/' + ${tour.id}}">Edit</a> /
+                <a th:href="@{'/admin/deleteTour/' + ${tour.id}}">Delete</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>
+</body>
+
+
+</html>

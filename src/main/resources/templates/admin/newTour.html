@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Tour</title>
+</head>
+<body>
+<div align="center">
+    <h1> Create a new tour</h1>
+    <br>
+    <form th:action="@{/admin/saveTour}" th:object="${tour}" method="post">
+<!--        <div>-->
+<!--            Id: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="*{id}" readonly="readonly">-->
+<!--        </div>-->
+<!--        <br>-->
+        <div>
+            Name: &nbsp;<input type="text" th:field="*{name}">
+        </div>
+        <br>
+        <div>
+            Price:&nbsp;&nbsp; <input type="text" th:field="*{price}">
+        </div>
+        <br>
+        <div>
+            Description: <input type="text" th:field="*{description}">
+        </div>
+        <br>
+        <br>
+        <div>
+            Dates: &nbsp;&nbsp;&nbsp;&nbsp;
+            from <input type="date" th:field="*{startDate}" placeholder="Start date"> &nbsp;&nbsp;&nbsp;
+            till <input type="date" th:field="*{endDate}" placeholder="End date">
+        </div>
+        <br>
+        <br>
+        <div>
+            <label th:for="status">Status</label>
+            <select th:field="*{status}">
+                <option th:each="tourStatus: ${tourStatuses}"
+                        th:text="${tourStatus.displayValue}"
+                        th:value="${tourStatus}"></option>
+            </select>
+        </div>
+
+        <br>
+        <br>
+        <button type="submit">SAVE</button>
+    </form>
+
+</div>
+</body>
+</html>
